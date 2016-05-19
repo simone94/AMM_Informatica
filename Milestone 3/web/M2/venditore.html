@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Venditore</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Simone Deidda">
+        <meta name="keywords" content="vendita di materassi online venditore">
+        <link href="style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <nav>
+        <a href="descrizione.html">Descrizione</a>
+        <a href="login.html">Login</a>
+        </nav>
+        <div id="body">
+        <form action="vendita" method="GET">
+            <label for="nome">Nome dell'oggetto</label>
+            <input type="text" name="nome" id="nome" value="" />
+            
+            <label class="notFirst" for="foto">URL di una foto dell'oggetto</label>
+            <input type="url" name="foto" id="foto" value="" />
+            
+            <label class="notFirst" for="descrizione">Breve descrizione dell'oggetto</label>
+            <textarea rows="5" cols="20" name="descrizione" id="descrizione"></textarea>
+            
+            <label class="notFirst" for="prezzo">Prezzo dell'oggetto</label>
+            <input type="text" name="prezzo" id="prezzo" value="" />
+            
+            <label class="notFirst" for="nPezzi">Numero di pezzi a disposizione</label>
+            <input type="number" min="0" name="nPezzi" id="nPezzi" value="0" />
+            
+            <div>
+            <input class="tasto" type="submit" value="Continua" />
+            </div>
+        </form>
+        </div>
+    </body>
+</html>
