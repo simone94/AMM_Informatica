@@ -1,0 +1,159 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 31-mar-2016, 12.44.22
+    Author     : Acer
+*/
+@media only screen and (min-width: 1024px){
+    nav{
+         z-index: 1;
+         position: fixed;
+         left: 1%;
+         background-color: darkgrey; 
+         width: 20%;
+         height:95%;
+         text-align: center;
+         margin-right: 15px;
+         font-size: 25px;   
+    }
+    nav > a::after{
+        content: '\A'; 
+        white-space: pre;
+    }
+    #body{
+        left: 22%;
+        position: absolute;
+    }    
+}
+@media only screen and (min-width: 480px) and (max-width: 1024px){
+    nav{
+         z-index: 1;
+         position: fixed;
+         left: 1%;
+         background-color: darkgray; 
+         width: 150px;
+         height:580px;
+         text-align: center;
+         margin-right: 15px;
+         font-size: 25px;   
+    }
+    nav > a::after{
+        content: '\A'; 
+        white-space: pre;
+    }
+    #body{
+        left: 160px;
+        position: absolute;
+    }
+}
+
+@media only screen and (max-width: 480px){
+    nav{
+         z-index: 1;
+         position: fixed;
+         left: 0px;
+         top: 0px;
+         background-color: darkgray; 
+         width: 100%;
+         height:auto;
+         text-align: center;
+         margin-right: 15px;
+         font-size: 25px;   
+    }
+    
+    nav > a::after{
+        content: '\A'; 
+        white-space: pre;
+    }
+    
+    #body{
+        left: 1%;
+        top: 100px;
+        position: absolute;
+    }
+}
+body{
+    background-color: gray;
+    color: black;
+    font-family: "Afta Sans", Helvetica, sans-serif;
+}
+
+h1,h2,h3{
+    color: red;
+    text-align: center;
+    font-weight: bold;
+}
+
+input, textArea{
+    color: lightgray;
+    font-style: italic;
+    border-style: solid; 
+}
+
+input:focus, textArea:focus{
+    color: black;
+    font-style: normal;
+    border-color: red; 
+    border-style: dashed;
+}
+
+input.tasto{
+    position: relative;
+    left: 30%;
+    color: black;
+    font-style: normal;
+    border-color: black;
+    border-style: solid;
+}
+
+table{
+    background-color: black;
+}
+
+tr{
+    background-color: white;
+}
+
+th{
+    background-color: darkred;
+    color: white;
+    font-family: "Dezen Pro", Helvetica, sans-serif;
+}
+
+td{
+    font-family: "Communist", Times, serif;
+    text-align: center;
+}
+
+.hidden{
+    display: none;
+}
+
+.dispari{
+    background-color: lightpink;
+}
+
+a:link{
+    font-family: "Berylium", Times, serif;
+    font-style: italic;
+}
+
+a:hover{
+    font-family: "Berylium", Times, serif;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 110%;
+}
+
+label.notFirst::before{
+    content: '\A\A'; 
+    white-space: pre;
+}
+
+label::after, div::before{
+    content: '\A'; 
+    white-space: pre;
+}
