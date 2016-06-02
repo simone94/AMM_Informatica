@@ -14,14 +14,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import M3.Classi.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author euralcoop
  */
-@WebServlet(name = "Start", urlPatterns = {"/descrizione.html"})
+@WebServlet(name = "Start", urlPatterns = {"/descrizione.html"}, loadOnStartup = 0)
 public class Start extends HttpServlet {
-
+    private static final String JDBC_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
+    private static final String DB_CLEAN_PATH = "../../web/WEB-INF/db/ammdb";
+    private static final String DB_BUILD_PATH = "WEB-INF/db/ammdb";
+    
+    @Override 
+    public void init(){
+        String dbConnection = "jdbc:derby:" + this.getServletContext().getRealPath("/") + DB_BUILD_PATH;
+        try {
+            Class.forName(JDBC_DRIVER);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FactoryMaterasso.getInstance().setConnectionString(dbConnection);
+        FactoryCliente.getInstance().setConnectionString(dbConnection);
+        FactoryVenditore.getInstance().setConnectionString(dbConnection);
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,7 +55,7 @@ public class Start extends HttpServlet {
         HttpSession session = request.getSession(true);
         
         session.setAttribute("AmILogged", false);
-        request.setAttribute("materassi", FactoryMaterasso.getInstance().GetMaterassiList());
+        request.setAttribute("materassi", FactoryMaterasso.getInstance().GetEveryMaterasso());
         request.getRequestDispatcher("descrizione.jsp").forward(request, response);
     }
 

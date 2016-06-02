@@ -26,7 +26,7 @@ and open the template in the editor.
     <c:if test="${giusto}">
         <nav>
         <a href="descrizione.html">Descrizione</a>
-        <a href="login.html?idUtente=${utente.getId()}">Login</a>
+        <a href="login.html?idUtente=${utente.getId()}&&tipoId=${utente.getTipo()}">Login</a>
         </nav>
         <div id="body">
         <table>
@@ -46,7 +46,7 @@ and open the template in the editor.
                         <td><img title="${m.getId()}" alt="Foto di un ${m.getNome()}" src="${m.getUrl()}" width="120" height="80"></td>
                         <td>${m.getDisponibili()}</td>
                         <td>€ ${m.getPrezzo()}</td>
-                        <td><a href="cliente.html?chiCompro=${m.getId()}&idUtente=${utente.getId()}">Metti nel carrello</a></td>
+                        <td><a href="cliente.html?chiCompro=${m.getId()}&&idUtente=${utente.getId()}&&tipoId=${utente.getTipo()}">Metti nel carrello</a></td>
                     </tr>
                 </c:if>
                 <c:if test="${pari}">
@@ -55,7 +55,7 @@ and open the template in the editor.
                         <td><img title="${m.getId()}" alt="Foto di un ${m.getNome()}" src="${m.getUrl()}" width="120" height="80"></td>
                         <td>${m.getDisponibili()}</td>
                         <td>€ ${m.getPrezzo()}</td>
-                        <td><a href="cliente.html?chiCompro=${m.getId()}&idUtente=${utente.getId()}">Metti nel carrello</a></td>
+                        <td><a href="cliente.html?chiCompro=${m.getId()}&&idUtente=${utente.getId()}&&tipoId=${utente.getTipo()}">Metti nel carrello</a></td>
                     </tr>
                 </c:if>
                     <p class="hidden">${dispari=!dispari} ${pari=!pari}</p>

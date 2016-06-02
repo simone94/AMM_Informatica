@@ -17,6 +17,7 @@ public class Cliente {
     private String username;
     private String password;
     private int id;
+    private int tipo;
     private double saldo;
     private ArrayList<Materasso> carrello;
 
@@ -116,5 +117,19 @@ public class Cliente {
      */
     public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+
+    /**
+     * @return the tipo
+     */
+    public int getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
 }

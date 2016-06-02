@@ -8,6 +8,9 @@ package M3.Servlet;
 import M3.Classi.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,24 +40,33 @@ public class Last extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         if (request.getParameter("Submit") != null) {
-            double saldo = Double.parseDouble(request.getParameter("Saldo"));
-
-            for (Materasso k : FactoryMaterasso.getInstance().GetMaterassiList()) {
-                if (k.getId().equals((request.getParameter("chiCompro")))) {
-                    if (saldo < k.getPrezzo()) {
-                        request.setAttribute("utente", FactoryCliente.getInstance().GetCliente());
-                        request.setAttribute("materasso", k);
-                        request.setAttribute("errore", true);
-                        request.getRequestDispatcher("conferma.jsp").forward(request, response);   
+            double saldoC = Double.parseDouble(request.getParameter("Saldo"));
+            Materasso j = FactoryMaterasso.getInstance().find(request.getParameter("chiCompro"));
+            int idCliente = Integer.parseInt(request.getParameter("idUtente"));
+            int idVenditore = Integer.parseInt(request.getParameter("idVenditore"));
+            double saldoV = (FactoryVenditore.getInstance().findWithId(idVenditore)).getSaldo();
+            
+            if (j != null) {
+                if (saldoC < j.getPrezzo()) {
+                    request.setAttribute("utente", FactoryCliente.getInstance().findWithId(idCliente));
+                    request.setAttribute("materasso", j);
+                    request.setAttribute("errore", true);
+                    request.getRequestDispatcher("conferma.jsp").forward(request, response);   
+                }
+                if (saldoC > j.getPrezzo()) {
+                    try {
+                        FactoryMaterasso.getInstance().buy((saldoC-j.getPrezzo()), idCliente, (saldoV+j.getPrezzo()), idVenditore, j.getId(), (j.getDisponibili()-1));
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
                     }
-                    if (saldo > k.getPrezzo()) {
-                        request.setAttribute("utente", FactoryCliente.getInstance().GetCliente());
-                        request.setAttribute("materasso", k);
-                        request.setAttribute("giusto", true);
-                        request.getRequestDispatcher("conferma.jsp").forward(request, response);   
-                    }
+                    
+                    request.setAttribute("utente", FactoryCliente.getInstance().findWithId(idCliente));
+                    request.setAttribute("materasso", j);
+                    request.setAttribute("giusto", true);
+                    request.getRequestDispatcher("conferma.jsp").forward(request, response);   
                 }
             }
+            
         }
     }
 

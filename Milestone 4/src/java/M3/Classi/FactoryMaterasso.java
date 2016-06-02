@@ -184,6 +184,43 @@ public class FactoryMaterasso {
         
     }
     
+    public void buy(double saldoCliente, int idCliente, double saldoVenditore, int idVenditore, String idMaterasso, int disp) throws SQLException{
+        Connection conn = DriverManager.getConnection(connectionString, "simone_deidda", "65075");
+        
+        PreparedStatement soldiCliente = null;
+        PreparedStatement soldiVenditore = null;
+        
+        try{
+           conn.setAutoCommit(false);
+           String updateCliente = "update utente set saldo = ? where id = ? and tipo = 0";
+           soldiCliente = conn.prepareStatement(updateCliente);
+           soldiCliente.setDouble(1, saldoCliente);
+           soldiCliente.setInt(2, idCliente);
+           int resultC = soldiCliente.executeUpdate();
+           
+           String updateVenditore = "update utente set saldo = ? where id = ? and tipo = 1";        
+           soldiVenditore = conn.prepareStatement(updateVenditore);
+           soldiVenditore.setDouble(1, saldoVenditore);
+           soldiVenditore.setInt(2, idVenditore);
+           int resultV = soldiVenditore.executeUpdate();
+           
+           change(idMaterasso, "disponibili", String.valueOf(disp));
+           
+           if(resultC != 1 || resultV != 1)
+               conn.rollback();
+           
+           conn.commit();           
+        }
+        catch(SQLException e){
+            try{
+                conn.rollback();
+            }
+            catch(SQLException e2){
+                e2.printStackTrace();
+            }
+        }
+    }
+    
     public Materasso find(String id){
         try{
             Connection conn = DriverManager.getConnection(connectionString, "simone_deidda", "65075");

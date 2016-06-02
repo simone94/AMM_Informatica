@@ -148,7 +148,7 @@ a:hover{
     font-size: 110%;
 }
 
-label.notFirst::before{
+label.notFirst::before, .bo::after{
     content: '\A\A'; 
     white-space: pre;
 }

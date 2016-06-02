@@ -37,19 +37,18 @@ public class Client extends HttpServlet {
         
         HttpSession session = request.getSession(false);
         
-        if(session.getAttribute("AmILogged").equals(false) || request.getParameter("idUtente").equals(1)){
+        if(session.getAttribute("AmILogged").equals(false) || request.getParameter("tipoId").equals(1)){
             request.setAttribute("errore", true);
             request.getRequestDispatcher("cliente.jsp").forward(request, response);
         }
         else{
-            
-            for(Materasso k : FactoryMaterasso.getInstance().GetMaterassiList()){
-                if(k.getId().equals((request.getParameter("chiCompro")))){
-                    request.setAttribute("utente", FactoryCliente.getInstance().GetCliente());
-                    request.setAttribute("materasso", k);
-                    request.setAttribute("AmIClient", true);
-                    request.getRequestDispatcher("conferma.jsp").forward(request, response);
-                }
+            Materasso j = FactoryMaterasso.getInstance().find(request.getParameter("chiCompro"));
+
+            if(j != null){
+                request.setAttribute("utente", FactoryCliente.getInstance().findWithId(Integer.parseInt(request.getParameter("idUtente"))));
+                request.setAttribute("materasso", j);
+                request.setAttribute("AmIClient", true);
+                request.getRequestDispatcher("conferma.jsp").forward(request, response);
             }
         }
     }

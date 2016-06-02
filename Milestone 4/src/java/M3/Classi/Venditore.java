@@ -16,6 +16,7 @@ public class Venditore {
     private String password;
     private double saldo;
     private int id;
+    private int tipo;
 
     /**
      * @return the nome
@@ -99,5 +100,19 @@ public class Venditore {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the tipo
+     */
+    public int getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
 }

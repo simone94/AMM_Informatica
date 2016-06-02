@@ -26,7 +26,7 @@ and open the template in the editor.
         <c:if test="${giusto}">
         <nav>
         <a href="descrizione.html">Descrizione</a>
-        <a href="login.html?idUtente=${utente.getId()}">Login</a>
+        <a href="login.html?idUtente=${utente.getId()}&&tipoId=${utente.getTipo()}">Login</a>
         </nav>
         <div id="body">
         <form action="venditore.html" method="GET">
@@ -37,7 +37,7 @@ and open the template in the editor.
             <input type="text" name="id" id="id" value="" />
             
             <label class="notFirst" for="foto">URL di una foto dell'oggetto</label>
-            <input type="url" name="foto" id="foto" value="" />
+            <input type="text" name="foto" id="foto" value="" />
             
             <label class="notFirst" for="descrizione">Breve descrizione dell'oggetto</label>
             <textarea rows="5" cols="20" name="descrizione" id="descrizione"></textarea>
@@ -51,7 +51,8 @@ and open the template in the editor.
             <label class="notFirst" for="nPezzi">Numero di pezzi a disposizione</label>
             <input type="number" min="0" name="nPezzi" id="nPezzi" value="0" />
             
-            <input type="hidden" name="idUtente" id="${utente.getId()}" />
+            <input type="hidden" name="idUtente" value="${utente.getId()}" />
+            <input type="hidden" name="tipoId" value="${utente.getTipo()}" />
             <div>
             <input class="tasto" type="submit" name="Continua" value="Continua" />
             </div>

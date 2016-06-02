@@ -1,0 +1,22 @@
+Nella Milestone ho scelto di inserire 2 tabelle:
+una per gli oggetti in vendita di nome 'letto', e contenente:
+    id (intero),
+    nome (stringa),
+    id materasso (stringa),
+    url dell'immagine (stringa),
+    descrizione sommararia (stringa),
+    descrizione dettagliata (stringa),
+    pezzi disponibili (intero),
+    prezzo dell'oggetto (decimale)
+
+una per gli utenti, sia clienti che venditori, di nome 'utente', e contenente:
+    id (intero),
+    nome (stringa),
+    cognome (stringa),
+    userneme (stringa),
+    password (stringa),
+    tipo di utente (0=cliente, 1=venditore) (intero),
+    saldo (decimale)
+
+Relazioni:
+utente-letto = m-m

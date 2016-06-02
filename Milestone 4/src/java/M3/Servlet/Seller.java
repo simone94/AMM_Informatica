@@ -36,9 +36,33 @@ public class Seller extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(false);
         
-        if(session.getAttribute("AmILogged").equals(false) || request.getParameter("idUtente").equals(0)){
+        if(session.getAttribute("AmILogged").equals(false) || request.getParameter("tipoId").equals(0)){
             request.setAttribute("errore", true);
             request.getRequestDispatcher("venditore.jsp").forward(request, response);
+        }
+        if(request.getParameter("New") != null){
+            request.setAttribute("giusto", true);
+            request.setAttribute("utente", FactoryVenditore.getInstance().findWithId(Integer.parseInt(request.getParameter("idUtente"))));
+            request.getRequestDispatcher("venditore.jsp").forward(request, response);
+        }
+        if(request.getParameter("Delete") != null){
+            FactoryMaterasso.getInstance().delete(request.getParameter("deleteWho"));
+            
+            request.setAttribute("giusto", true);
+            request.setAttribute("utente", FactoryVenditore.getInstance().findWithId(Integer.parseInt(request.getParameter("idUtente"))));
+            request.setAttribute("materassi", FactoryMaterasso.getInstance().GetEveryMaterasso());
+            request.getRequestDispatcher("scegli.jsp").forward(request, response);
+        }
+        if(request.getParameter("Correction") != null){
+            String id = request.getParameter("correctWho");
+            String what = request.getParameter("correctWhat");
+            String nuovo = request.getParameter("right");
+            FactoryMaterasso.getInstance().change(id, what, nuovo);
+            
+            request.setAttribute("giusto", true);
+            request.setAttribute("utente", FactoryVenditore.getInstance().findWithId(Integer.parseInt(request.getParameter("idUtente"))));
+            request.setAttribute("materassi", FactoryMaterasso.getInstance().GetEveryMaterasso());
+            request.getRequestDispatcher("scegli.jsp").forward(request, response);
         }
         if(request.getParameter("Continua") != null){
             
@@ -51,7 +75,9 @@ public class Seller extends HttpServlet {
             m.setDisponibili(Integer.parseInt(request.getParameter("nPezzi")));
             m.setPrezzo(Double.parseDouble(request.getParameter("prezzo")));
             
-            request.setAttribute("utente", FactoryVenditore.getInstance().GetVenditore());
+            FactoryMaterasso.getInstance().save(m);
+            
+            request.setAttribute("utente", FactoryVenditore.getInstance().findWithId(Integer.parseInt(request.getParameter("idUtente"))));
             request.setAttribute("materasso", m);
             request.getRequestDispatcher("conferma.jsp").forward(request, response);
         }

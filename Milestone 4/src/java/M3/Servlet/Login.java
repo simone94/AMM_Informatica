@@ -39,16 +39,16 @@ public class Login extends HttpServlet {
         
         
         if(session.getAttribute("AmILogged").equals(true)){
-            int idUtente=Integer.parseInt(request.getParameter("idUtente"));
-            if(idUtente==0){
+            int Tipo=Integer.parseInt(request.getParameter("tipoId"));
+            if(Tipo==0){
                 request.setAttribute("giusto", true);
-                request.setAttribute("utente", FactoryCliente.getInstance().GetCliente());
-                request.setAttribute("materassi", FactoryMaterasso.getInstance().GetMaterassiList());
+                request.setAttribute("utente", FactoryCliente.getInstance().findWithId(Integer.parseInt(request.getParameter("idUtente"))));
+                request.setAttribute("materassi", FactoryMaterasso.getInstance().GetEveryMaterasso());
                 request.getRequestDispatcher("cliente.jsp").forward(request, response);
             }
-            if(idUtente==1){
+            if(Tipo==1){
                 request.setAttribute("giusto", true);
-                request.setAttribute("utente", FactoryVenditore.getInstance().GetVenditore());
+                request.setAttribute("utente", FactoryVenditore.getInstance().findWithId(Integer.parseInt(request.getParameter("idUtente"))));
                 request.getRequestDispatcher("venditore.jsp").forward(request, response);
             }
         }
@@ -57,21 +57,22 @@ public class Login extends HttpServlet {
             
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            Cliente nuovoCliente = FactoryCliente.getInstance().GetCliente();
-            Venditore nuovoVenditore = FactoryVenditore.getInstance().GetVenditore();
+            Cliente nuovoCliente = FactoryCliente.getInstance().findWithUsernameAndPassword(username, password);
+            Venditore nuovoVenditore = FactoryVenditore.getInstance().findWithUsernameAndPassword(username, password);
             
-            if(nuovoCliente.getUsername().equals(username) && nuovoCliente.getPassword().equals(password)){
+            if(nuovoCliente != null){
                 session.setAttribute("AmILogged", true);
                 request.setAttribute("giusto", true);
                 request.setAttribute("utente", nuovoCliente);
-                request.setAttribute("materassi", FactoryMaterasso.getInstance().GetMaterassiList());
+                request.setAttribute("materassi", FactoryMaterasso.getInstance().GetEveryMaterasso());
                 request.getRequestDispatcher("cliente.jsp").forward(request, response);
             }
-            if(nuovoVenditore.getUsername().equals(username) && nuovoVenditore.getPassword().equals(password)){
+            if(nuovoVenditore != null){
                 session.setAttribute("AmILogged", true);
                 request.setAttribute("giusto", true);
                 request.setAttribute("utente", nuovoVenditore);
-                request.getRequestDispatcher("venditore.jsp").forward(request, response);
+                request.setAttribute("materassi", FactoryMaterasso.getInstance().GetEveryMaterasso());
+                request.getRequestDispatcher("scegli.jsp").forward(request, response);
             }
             request.setAttribute("errore", true);
             request.getRequestDispatcher("login.jsp").forward(request, response);

@@ -42,6 +42,8 @@ and open the template in the editor.
             </ul>
             <c:if test="${AmIClient}">
                 <form action="Last" method="GET">
+                <input type="hidden" name="idUtente" id="idUtente" value="${utente.getId()}" />
+                <input type="hidden" name="idVenditore" id="idUtente" value="2" />
                 <input type="hidden" name="Saldo" id="Saldo" value="${utente.getSaldo()}" />
                 <input type="hidden" name="chiCompro" id="chiCompro" value="${materasso.getId()}" />
                 <input class="tasto" type="submit" name="Submit" value="Procedi" />
