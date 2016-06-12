@@ -20,6 +20,8 @@ and open the template in the editor.
         <meta name="author" content="Simone Deidda">
         <meta name="keywords" content="vendita di materassi online cliente">
         <link href="M2/style.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="lib/jquery-2.2.4.min.js"></script>
+        <script type="text/javascript" src="lib/filterScript.js"></script>
     </head>
     <body>
     <c:if test="${errore}"><h3>ERRORE! NON SEI AUTORIZZATO A VISUALIZZARE LA PAGINA</h3></c:if>
@@ -29,7 +31,12 @@ and open the template in the editor.
         <a href="login.html?idUtente=${utente.getId()}&&tipoId=${utente.getTipo()}">Login</a>
         </nav>
         <div id="body">
-        <table>
+        
+        <label for="Filtra">Cerca tra gli oggetti esposti</label>
+        <input type="hidden" id="idU" value="${utente.getId()}"/>
+        <input type="hidden" id="tipo" value="${utente.getTipo()}"/>
+        <input type="text" id="Filtra" />
+        <table id="remake">
             <tr>
                 <th>Nome del prodotto</th>
                 <th>Foto</th>
@@ -59,8 +66,7 @@ and open the template in the editor.
                     </tr>
                 </c:if>
                     <p class="hidden">${dispari=!dispari} ${pari=!pari}</p>
-            </c:forEach>
-            
+            </c:forEach>            
         </table>
         </div>
         </c:if>

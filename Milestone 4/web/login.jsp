@@ -31,18 +31,19 @@ and open the template in the editor.
         </nav>
         <div id="body">
         
-        <form action="login.html" method="GET">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" value="" />
-            
-            <label class="notFirst" for="password">Password </label>
-            <input type="password" name="password" id="password" value="" />
-            <div>
-            <input class="tasto" type="submit" name="Submit" value="Submit" />
-            </div>
-        </form>
-            
-        <c:if test="${errore}"><h3>USERNAME O PASSWORD SBAGLIATI, RIPROVA</h3></c:if> 
+            <form action="login.html" method="GET">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" value="" />
+
+                <label class="notFirst" for="password">Password </label>
+                <input type="password" name="password" id="password" value="" />
+                <div>
+                <input class="tasto" type="submit" name="Submit" value="Submit" />
+                </div>
+                <c:if test="${errore}"><h3>USERNAME O PASSWORD SBAGLIATI, RIPROVA</h3></c:if> 
+            </form>
+        
+        
         </div>
     
     </body>

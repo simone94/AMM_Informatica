@@ -117,6 +117,40 @@ public class FactoryMaterasso {
         return null;
     }
     
+    public ArrayList<Materasso> filtered(String id){
+        try{
+            ArrayList<Materasso> fromDataBase = new ArrayList<Materasso>();
+            String k = "%"+id+"%";
+            Connection conn = DriverManager.getConnection(connectionString, "simone_deidda", "65075");
+            
+            String query = "select * from letto where nome like ? or descrizione like ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, k);
+            ps.setString(2, k);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Materasso other = new Materasso();
+                other.setNome(rs.getString("nome"));
+                other.setId(rs.getString("idMaterasso"));
+                other.setUrl(rs.getString("url"));
+                other.setDescrizione(rs.getString("descrizione"));
+                other.setDettagli(rs.getString("dettagli"));
+                other.setDisponibili(rs.getInt("disponibili"));
+                other.setPrezzo(rs.getDouble("prezzo"));
+                
+                fromDataBase.add(other);
+            }
+            rs.close();
+            conn.close();
+            return fromDataBase;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public void delete(String id){
         try{
             Connection conn = DriverManager.getConnection(connectionString, "simone_deidda", "65075");

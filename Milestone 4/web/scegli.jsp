@@ -28,9 +28,10 @@ and open the template in the editor.
         <a href="login.html?idUtente=${utente.getId()}&&tipoId=${utente.getTipo()}">Login</a>
         </nav>
         <div id="body">
-        <h1>Ciao ${utente.getNome()} ${utente.getCognome()}</h1>
-        <h2>Scegli cosa fare:</h2>
         <form action="venditore.html" method="GET">
+            <h1>Ciao ${utente.getNome()} ${utente.getCognome()}</h1>
+            <h2>Scegli cosa fare:</h2>
+        
             <input type="hidden" name="idUtente" value="${utente.getId()}" />
             <input type="hidden" name="tipoId" value="${utente.getTipo()}" />
             

@@ -17,7 +17,5 @@ create table utente(
     tipo INTEGER,
     saldo REAL)
 */
-INSERT INTO utente (id, nome, cognome, username, password, tipo, saldo) 
-VALUES (default, 'Giulio', 'di Gioia', 'giudigio', 'ciaodavide', 1, 100.00);
 
-select * from utente
+select * from letto where nome like '%M%' or descrizione like '%M%';
